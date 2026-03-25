@@ -5,8 +5,8 @@ export const procesarCodigo = (raw: string): Proyecto[] => {
         .filter(b => b.trim() !== '')
         .map(bloque => {
             const lineas = bloque.split('\n').map(l => l.trim());
-            const dirMatch = lineas.find(l => l.toLowerCase().startsWith('path:'));
-            const modMatch = lineas.find(l => l.toLowerCase().startsWith('name:'));
+            const dirMatch = lineas.find(l => l.toLowerCase().startsWith('@path:'));
+            const modMatch = lineas.find(l => l.toLowerCase().startsWith('@name:'));
 
             const resultado: Proyecto = {
                 directorio: dirMatch ? dirMatch.split(':')[1].trim() : './dist',
@@ -18,8 +18,8 @@ export const procesarCodigo = (raw: string): Proyecto[] => {
             let visibilidadActual = 'public';
 
             lineas.forEach(linea => {
-                if (linea.toLowerCase().startsWith('class:')) {
-                    claseActual = { nombreClase: linea.substring(6).trim().replace(/\s+/g, ''), metodos: [] };
+                if (linea.toLowerCase().startsWith('@class:')) {
+                    claseActual = { nombreClase: linea.substring(7).trim().replace(/\s+/g, ''), metodos: [] };
                     resultado.entidades.push(claseActual);
                 } else if (/^(public|private|protected):$/i.test(linea)) {
                     visibilidadActual = linea.replace(':', '').toLowerCase();

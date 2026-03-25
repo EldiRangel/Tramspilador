@@ -1,20 +1,26 @@
-@subsystem
-	path: ./output/
-	name: operaciones
-	class: Basic Operation
-	public:
-		sum (int x, int y): int ;
-		Resta (int x, int y): int;
-	class: factorial
-		public:
-			fact (int num): int;
-@subsystem
-	path: ./output/
-	name: seguridad
-	class: Auth
-	private:
-		validate (string token): boolean;
-	protected:
-		encrypt (string data): string;
-	public:
-		login (): void;
+@Subsystem
+@Path: ./output
+@Name: GestionInventario
+@Class: Producto
+    private:
+        checkStock(id: int): boolean;
+    public:
+        updatePrice(newPrice: int): void;
+        getName(): string;
+
+@Subsystem
+@Path: ./output
+@Name: ModuloNotificaciones
+@Class: EmailService
+    protected:
+        formatMessage(text: string): string;
+    public:
+        sendNotification(userId: int, msg: string): boolean;
+
+@Subsystem
+@Path: ./output
+@Name: AnalisisDatos
+@Class: CalculadoraEstadistica
+    public:
+        getPromedio(val1: int, val2: int): int;
+        isGreater(a: int, b: int): boolean;

@@ -18,8 +18,7 @@ export const fabricarArchivos = (proyectos: Proyecto[]) => {
         }
 
         p.entidades.forEach(clase => {
-            let cuerpo = `// Transpilado exitosamente\n\n`;
-            cuerpo += `export class ${clase.nombreClase} {\n\n`;
+            let cuerpo = `export class ${clase.nombreClase} {\n\n`;
 
             clase.metodos.forEach(m => {
                 const isVoid = m.retorno.toLowerCase() === 'void';
